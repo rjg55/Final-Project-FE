@@ -1,34 +1,35 @@
-import { StatusBar } from "expo-status-bar";
-import MapView from "react-native-maps";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
-import EventsList from "./components/EventsList";
-import Navbar from "./components/Navbar";
+import 'react-native-geture-handler';
+import Navbar from './components/Navbar';
+import { EventContext } from './contexts/EventsContext';
+import { useState, useEffect } from 'react';
+import { getEvents } from './api.js';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Map from './components/Map';
 
-import { UserContext } from "./contexts/UserContext";
+const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [ events, setEvents ] = useState([]);
+
+  useEffect(() => {
+    getEvents()
+      .then((eventsFromApi) => {
+        setEvents(eventsFromApi);
+      })
+      .catch((err) => {
+        setError({ err });
+      });
+  }, []);
+
   return (
-    <UserContext.Provider value={{ loggedInUser, setLoggedInUser }}>
-      <View style={styles.container}>
+    <NavigationContainer>
+      <EventContext.Provider value={{ events, setEvents }}>
         <Navbar />
-        <MapView style={styles.map}>
-          <EventsList />
-        </MapView>
-        <StatusBar style="auto" />
-      </View>
-    </UserContext.Provider>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={Map} />
+        </Stack.Navigator>
+      </EventContext.Provider>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  map: {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
-  },
-});
