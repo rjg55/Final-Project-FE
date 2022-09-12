@@ -1,21 +1,11 @@
 import React from 'react';
-import { getEvents } from '../api';
-import { useState, useEffect } from 'react';
-import { View } from 'react-native';
 import { Marker } from 'react-native-maps';
+import { useContext } from 'react';
+import { EventContext } from '../contexts/EventsContext';
 
 const EventsList = () => {
-  const [ events, setEvents ] = useState([]);
 
-  useEffect(() => {
-    getEvents()
-      .then((eventsFromApi) => {
-        setEvents(eventsFromApi);
-      })
-      .catch((err) => {
-        setError({ err });
-      });
-  }, []);
+    const { events } = useContext(EventContext) 
 
   return (
     <>
