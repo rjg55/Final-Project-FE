@@ -1,13 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
-import MapView from 'react-native-maps';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
-import EventMarkerList from './components/EventMarkerList';
+import 'react-native-geture-handler';
 import Navbar from './components/Navbar';
-import { NativeRouter, Route, Link, Routes } from 'react-router-native';
 import { EventContext } from './contexts/EventsContext';
 import { useState, useEffect } from 'react';
 import { getEvents } from './api.js';
-import EventList from './components/EventList';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Map from './components/Map';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [ events, setEvents ] = useState([]);
@@ -23,32 +23,13 @@ export default function App() {
   }, []);
 
   return (
-    <NativeRouter>
+    <NavigationContainer>
       <EventContext.Provider value={{ events, setEvents }}>
-        <View style={styles.container}>
-          <Navbar />
-          <MapView style={styles.map}>
-            <EventMarkerList />
-          </MapView>
-          <StatusBar style="auto" />
-        </View>
-        {/* <Routes>
-          <Route exact path="/events" component={EventList} />
-        </Routes> */}
+        <Navbar />
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={Map} />
+        </Stack.Navigator>
       </EventContext.Provider>
-    </NativeRouter>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  map: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height
-  }
-});
