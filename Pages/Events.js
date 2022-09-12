@@ -1,7 +1,12 @@
-import React from 'react';
+import { View, Text } from 'react-native';
+import EventList from '../components/EventList';
 
 const Events = () => {
-  return <View>Events</View>;
+  return (
+    <View>
+      <EventList />
+    </View>
+  );
 };
 
 export default Events;
