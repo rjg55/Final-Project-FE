@@ -1,16 +1,17 @@
-import 'react-native-geture-handler';
-import Navbar from './components/Navbar';
-import { EventContext } from './contexts/EventsContext';
-import { useState, useEffect } from 'react';
-import { getEvents } from './api.js';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Map from './components/Map';
+import "react-native-gesture-handler";
+import Navbar from "./components/Navbar";
+import { EventContext } from "./contexts/EventsContext";
+import { useState, useEffect } from "react";
+import { getEvents } from "./api.js";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Map from "./components/Map";
+import Groups from "./components/Groups";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [ events, setEvents ] = useState([]);
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
     getEvents()
@@ -25,9 +26,11 @@ export default function App() {
   return (
     <NavigationContainer>
       <EventContext.Provider value={{ events, setEvents }}>
-        <Navbar />
         <Stack.Navigator>
+          {/* <Navbar /> */}
+          <Stack.Screen name="navBar" component={Navbar} />
           <Stack.Screen name="Home" component={Map} />
+          <Stack.Screen name="Groups" component={Groups} />
         </Stack.Navigator>
       </EventContext.Provider>
     </NavigationContainer>
