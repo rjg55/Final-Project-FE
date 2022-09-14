@@ -10,13 +10,15 @@ import {
   Image,
   TouchableOpacity,
   Dimensions,
-  Platform
-} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Fontisto from 'react-native-vector-icons/Fontisto';
-import { useContext } from 'react';
-import { EventContext } from '../contexts/EventsContext';
+  Platform,
+} from "react-native";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Fontisto from "react-native-vector-icons/Fontisto";
+import { useContext } from "react";
+import { EventContext } from "../contexts/EventsContext";
+import { useNavigation } from "@react-navigation/native";
+import { format } from "date-fns";
 
 const { width, height } = Dimensions.get('window');
 const CARD_HEIGHT = 100;
@@ -25,6 +27,7 @@ const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
 
 const Map = () => {
   const { events } = useContext(EventContext);
+  const navigation = useNavigation();
 
   const initialMapState = {
     categories: [
@@ -158,6 +161,8 @@ const Map = () => {
               }
             ]
           };
+          const date = format(new Date(event.startTime), "d MMM yyyy");
+          const start_time = format(new Date(event.startTime), "h:mm bbb");
           return (
             <MapView.Marker
               key={index}
@@ -167,8 +172,10 @@ const Map = () => {
               }}
               onPress={(e) => onMarkerPress(e)}
               title={event.title}
-              description={event.startTime}>
-              <Animated.View style={[ styles.markerWrap ]}>
+
+              description={`${date} - ${start_time}`}
+            >
+              <Animated.View style={[styles.markerWrap]}>
                 <Animated.Image
                   source={require('../map_marker.png')}
                   style={[ styles.marker, scaleStyle ]}
@@ -243,8 +250,28 @@ const Map = () => {
                 {event.description}
               </Text>
               <View style={styles.button}>
-                <TouchableOpacity onPress={() => {}} style={styles.signIn}>
-                  <Text style={styles.textSign}>Go To Event</Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate("Event Details", { _id: event._id });
+                  }}
+                  style={[
+                    styles.signIn,
+                    {
+                      borderColor: "#FF6347",
+                      borderWidth: 1,
+                    },
+                  ]}
+                >
+                  <Text
+                    style={[
+                      styles.textSign,
+                      {
+                        color: "#FF6347",
+                      },
+                    ]}
+                  >
+                    Go To Event
+                  </Text>
                 </TouchableOpacity>
               </View>
             </View>
