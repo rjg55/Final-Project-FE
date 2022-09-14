@@ -1,22 +1,18 @@
-import "react-native-gesture-handler";
-import { EventContext } from "./contexts/EventsContext";
-import { useState, useEffect } from "react";
-import { getEvents } from "./api.js";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Text } from "react-native";
-import SingleEvent from "./components/SingleEvent";
-import MainPage from "./Pages/MainPage";
-import SingleGroup from "./components/SingleGroup";
-import Groups from "./components/Groups";
-import Map from "./components/Map";
-import Events from "./Pages/Events";
-
+import 'react-native-gesture-handler';
+import { EventContext } from './contexts/EventsContext';
+import { useState, useEffect } from 'react';
+import { getEvents } from './api.js';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Text } from 'react-native';
+import SingleEvent from './components/SingleEvent';
+import MainPage from './Pages/MainPage';
+import SingleGroup from './components/SingleGroup';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [events, setEvents] = useState([]);
+  const [ events, setEvents ] = useState([]);
 
   useEffect(() => {
     getEvents()
@@ -34,19 +30,24 @@ export default function App() {
         <Text
           style={{
             paddingTop: 70,
-            textAlign: "center",
+            paddingBottom: 20,
+            textAlign: 'center',
             fontSize: 30,
-            fontWeight: "bold",
-          }}
-        >
+            fontWeight: 'bold',
+            color: '#FF6347'
+          }}>
           UpMeet
         </Text>
         {/* <Navbar /> */}
         <Stack.Navigator>
-          <Stack.Screen name="Home" component={MainPage} events={events} />
+          <Stack.Screen
+            name="Home"
+            options={{ headerShown: false }}
+            component={MainPage}
+            events={events}
+          />
           <Stack.Screen name="Event Details" component={SingleEvent} />
           <Stack.Screen name="Group Details" component={SingleGroup} />
-
         </Stack.Navigator>
       </EventContext.Provider>
     </NavigationContainer>
