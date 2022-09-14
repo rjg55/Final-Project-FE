@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 function getEvents() {
   return axios
@@ -12,7 +12,7 @@ function getEvents() {
 }
 
 function getAllGroups() {
-  return axios.get("http://54.86.179.94:8080/api/groups").then(({ data }) => {
+  return axios.get('http://54.86.179.94:8080/api/groups').then(({ data }) => {
     return data.groups;
   });
 }
@@ -41,6 +41,18 @@ function getEventMessages(id) {
     });
 }
 
+
+function sendEventMessage(id, userTag, message) {
+  return axios
+    .post(`/api/event-messages/events/${id}`, {
+      eventTag: id,
+      userTag,
+      message
+    })
+    .then(({ data }) => {
+      console.log(data);
+    });
+
 function postGroup(newGroupName, groupCategory, newGroupDescription, username) {
   return axios.post("http://54.86.179.94:8080/api/groups", {
     title: newGroupName,
@@ -56,5 +68,6 @@ module.exports = {
   getSingleEvent,
   getEventMessages,
   getGroupByID,
+  sendEventMessage
   postGroup,
 };

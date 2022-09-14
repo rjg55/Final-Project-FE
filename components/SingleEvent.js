@@ -3,6 +3,7 @@ import { getSingleEvent } from '../api';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { format } from 'date-fns';
 import EventMessages from './EventMessages';
+import AddMessage from './AddMessage';
 
 const SingleEvent = ({ route }) => {
   const [ isLoading, setIsLoading ] = useState(true);
@@ -44,6 +45,7 @@ const SingleEvent = ({ route }) => {
           <Text style={styles.endTime}>End time: {endTime}</Text>
         </View>
         <Text style={styles.title}> Comments </Text>
+        <AddMessage />
         <EventMessages _id={_id} event={event} />
       </ScrollView>
     );
