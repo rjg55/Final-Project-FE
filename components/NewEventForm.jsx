@@ -45,7 +45,10 @@ const AddEvent = ({route}) => {
 
   
   const handleSubmit = () => {
-    setNewEventCoords(coords)
+      setNewEventCoords(coords)
+    if (!newEventCoords) {
+        navigation.navigate('Home')
+    }
     postEvent(newEventTitle,
         newEventCategory,
         newEventDescription,
@@ -58,12 +61,11 @@ const AddEvent = ({route}) => {
         setNewEventCategory("");
         setNewEventDescription("");
         setNewEventTitle("");
-        newEventStartTime("");
-        newEventEndTime("");
+        setNewEventStartTime("");
+        setNewEventEndTime("");
       })
       .catch((error) =>{
         console.log(error);
-          setErr(`${error.response.status} ${error.response.statusText}`)
       }
       );
       navigation.navigate('Home')
@@ -114,6 +116,7 @@ const AddEvent = ({route}) => {
     setEndTimePicker(true)
   };
 
+ 
   return (
     <View style={styles.container}>
       <Text style={styles.text}> Create Event </Text>
@@ -131,9 +134,10 @@ const AddEvent = ({route}) => {
           setNewEventCategory(currentGroupCategory)
         }
       >
-        {validGroupCategories.map((category) => {
+        {validGroupCategories.map((category, index) => {
           return (
             <Picker.Item
+            key={index}
               label={category}
               value={category !== "all" ? category : ""}
             />
