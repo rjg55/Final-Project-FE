@@ -26,7 +26,6 @@ const NewEvent = () => {
     getCoordsFromLocation(location)
       .then((coordsFromApi) => {
         setSearchCoords(coordsFromApi);
-        console.log(searchCoords);
       })
       .catch((err) => {
         console.log(err);
