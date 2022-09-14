@@ -11,11 +11,18 @@ import AddGroup from "./components/AddGroup";
 import Groups from "./components/Groups";
 import Map from "./components/Map";
 import Events from "./Pages/Events";
-import { TouchableHighlight, Button, Image, StyleSheet } from "react-native";
+import {
+  TouchableHighlight,
+  Button,
+  Image,
+  StyleSheet,
+  Text,
+} from "react-native";
 import ProfilePage from "./components/ProfilePage";
 import EditProfile from "./components/EditProfile";
 import Header from "./components/Header";
 import NewEvent from "./components/NewEvent";
+import NewEventForm from "./components/NewEventForm";
 
 const Stack = createNativeStackNavigator();
 
@@ -77,6 +84,7 @@ export default function App() {
             <Stack.Screen name="Profile" component={ProfilePage} />
             <Stack.Screen name="Edit Profile" component={EditProfile} />
             <Stack.Screen name="NewEvent" component={NewEvent} />
+            <Stack.Screen name="NewEventForm" component={NewEventForm} />
           </Stack.Navigator>
         </EventContext.Provider>
       </UserContext.Provider>

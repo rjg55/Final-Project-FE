@@ -16,7 +16,12 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Fontisto from "react-native-vector-icons/Fontisto";
 import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+
+
 const NewEvent = () => {
+  
+  const navigation = useNavigation();
   const [location, onChangeText] = useState("");
   const [searchCoords, setSearchCoords] = useState({
     lat: 53.4808,
@@ -26,6 +31,7 @@ const NewEvent = () => {
     getCoordsFromLocation(location)
       .then((coordsFromApi) => {
         setSearchCoords(coordsFromApi);
+        navigation.navigate('NewEventForm', {location, searchCoords})
       })
       .catch((err) => {
         console.log(err);
