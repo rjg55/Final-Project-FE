@@ -1,70 +1,59 @@
 import React, { useState, useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
-import { EventContext } from '../contexts/EventsContext';
 import { sendEventMessage } from '../api';
 import {
   TextInput,
   SafeAreaView,
-  Button,
   StyleSheet,
   View,
   TouchableOpacity,
   Text
 } from 'react-native';
 
-const AddMessage = ({ id, setNewComment }) => {
-  //   const { user } = useContext(UserContext);
-  //   const { event } = useContext(EventContext);
+const AddMessage = ({ _id }) => {
+  const { user } = useContext(UserContext);
 
   const [ text, setText ] = useState('');
+  const [ done, setDone ] = useState('Add comment');
+  const [ color, setColor ] = useState('#fff');
 
-  //   const [ done, setDone ] = useState('Add comment');
-  //   const [ disabled, setDisabled ] = useState(false);
-  //   const [ sent, setSent ] = useState('');
-  //   const [ message, setMessage ] = useState('');
-  //   const [ color, setColor ] = useState('primary');
-
-  //   const handleSubmit = () => {
-  //     if (message === '') {
-  //       setColor('error');
-  //       setDone('Please type a comment first');
-  //       setTimeout(() => {
-  //         setColor('primary');
-  //         setDone('Add a comment');
-  //       }, 1000);
-  //     } else {
-  //       setDisabled(true);
-  //       sendEventMessage(event._id, user.userTag, message).then(() => {
-  //         setDisabled(false);
-  //         setDone(<Done />);
-  //         setSent('posted');
-  //         setColor('success');
-  //         setTimeout(() => {
-  //           setSent('');
-  //           setDone('Add Comment');
-  //           setColor('primary');
-  //         }, 1500);
-  //         setMessage('');
-  //         setNewComment(true);
-  //       });
-  //     }
-  //   };
-
-  const onChangeText = (e) => {
-    setText(e.target.value);
+  const handleSubmit = () => {
+    if (text !== '') {
+      sendEventMessage(_id, user._id, text).then(() => {
+        setText('');
+        setDone('Posted');
+        setTimeout(() => {
+          setDone('Add a comment');
+        }, 1500);
+      });
+    } else {
+      setText('');
+      setDone('Please add a comment');
+      setColor('red');
+      setTimeout(() => {
+        setDone('Add a comment');
+        setColor('#fff');
+      }, 1500);
+    }
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.outerbox}>
         <TextInput
-          onChangeText={onChangeText}
+          onChangeText={setText}
           value={text}
           style={styles.textField}
+          borderColor={color}
+          backgroundColor="#fff"
           placeholder="Add a comment"
         />
-        <TouchableOpacity title="Add Comment" type="submit" style={styles.btn}>
-          <Text style={styles.btnText}>Add Comment</Text>
+        <TouchableOpacity
+          title="Add Comment"
+          type="submit"
+          style={styles.btn}
+          onPress={handleSubmit}>
+          <Text style={styles.btnText}>{done}</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -76,7 +65,7 @@ export default AddMessage;
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-    backgroundColor: 'lightgrey',
+    backgroundColor: '#d3d7de',
     borderRadius: 5,
     padding: 10,
     margin: 10,
@@ -87,10 +76,10 @@ const styles = StyleSheet.create({
   },
   textField: {
     height: 50,
-    // backgroundColor: '#fff',
+    backgroundColor: '#fff',
     borderRadius: 5,
     paddingLeft: 20,
-    borderWidth: 1,
+    borderWidth: 1.5,
     borderColor: '#FF6347',
     padding: 10,
     height: 60

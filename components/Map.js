@@ -163,8 +163,8 @@ const Map = () => {
               },
             ],
           };
-          const date = format(new Date(event.startTime), "d MMM yyyy");
-          const start_time = format(new Date(event.startTime), "h:mm bbb");
+          const date = format(new Date(event.startTime), 'd MMM yyyy');
+          const start_time = format(new Date(event.startTime), 'h:mm bbb');
           return (
             <MapView.Marker
               key={index}
@@ -265,7 +265,7 @@ const Map = () => {
               <View style={styles.button}>
                 <TouchableOpacity
                   onPress={() => {
-                    navigation.navigate("Event Details", { _id: event._id });
+                    navigation.navigate('Event Details', { _id: event._id });
                   }}
                   style={[
                     styles.signIn,
