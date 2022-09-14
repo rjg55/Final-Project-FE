@@ -15,6 +15,7 @@ import { TouchableHighlight, Button, Image, StyleSheet } from "react-native";
 import ProfilePage from "./components/ProfilePage";
 import EditProfile from "./components/EditProfile";
 import Header from "./components/Header";
+import NewEvent from "./components/NewEvent";
 
 const Stack = createNativeStackNavigator();
 
@@ -50,6 +51,19 @@ export default function App() {
       <UserContext.Provider value={{ user, setUser }}>
         <EventContext.Provider value={{ events, setEvents }}>
           <Header />
+          <Text
+            style={{
+              paddingTop: 70,
+              paddingBottom: 20,
+              textAlign: "center",
+              fontSize: 30,
+              fontWeight: "bold",
+              color: "#FF6347",
+            }}
+          >
+            UpMeet
+          </Text>
+          {/* <Navbar /> */}
           <Stack.Navigator>
             <Stack.Screen
               name="Home"
@@ -62,6 +76,7 @@ export default function App() {
             <Stack.Screen name="Create Group" component={AddGroup} />
             <Stack.Screen name="Profile" component={ProfilePage} />
             <Stack.Screen name="Edit Profile" component={EditProfile} />
+            <Stack.Screen name="NewEvent" component={NewEvent} />
           </Stack.Navigator>
         </EventContext.Provider>
       </UserContext.Provider>

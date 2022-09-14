@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   Dimensions,
   Platform,
+  Button,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -186,6 +187,16 @@ const Map = () => {
           );
         })}
       </MapView>
+      <View style={styles.addButton}>
+        <Button
+          title="Add event!"
+          onPress={() => {
+            navigation.navigate("NewEvent");
+          }}
+        >
+          Add Event
+        </Button>
+      </View>
       <ScrollView
         horizontal
         scrollEventThrottle={1}
@@ -296,6 +307,28 @@ const styles = StyleSheet.create({
   map: {
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
+  },
+  addButton: {
+    position: "absolute",
+    top: 50,
+    left: 10,
+    paddingHorizontal: 10,
+    zIndex: 100,
+  },
+  searchBox: {
+    position: "absolute",
+    marginTop: Platform.OS === "ios" ? 40 : 20,
+    flexDirection: "row",
+    backgroundColor: "#fff",
+    width: "90%",
+    alignSelf: "center",
+    borderRadius: 5,
+    padding: 10,
+    shadowColor: "#ccc",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 10,
   },
   chipsScrollView: {
     position: "absolute",
