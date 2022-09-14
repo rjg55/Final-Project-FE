@@ -73,6 +73,29 @@ function getCoordsFromLocation(location) {
     });
 }
 
+function patchUser(
+  id,
+  firstName,
+  lastName,
+  username,
+  email,
+  phoneNumber,
+  dateOfBirth
+) {
+  return axios
+    .patch(`http://54.86.179.94:8080/api/users/${id}`, {
+      firstName,
+      lastName,
+      username,
+      email,
+      phoneNumber,
+      dateOfBirth,
+    })
+    .then(({ data }) => {
+      return data;
+    });
+}
+
 module.exports = {
   getAllGroups,
   getEvents,
@@ -82,4 +105,5 @@ module.exports = {
   sendEventMessage,
   postGroup,
   getCoordsFromLocation,
+  patchUser,
 };
