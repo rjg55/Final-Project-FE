@@ -279,7 +279,7 @@ const Map = () => {
                     style={[
                       styles.textSign,
                       {
-                        color: "#FF6347",
+                        color: "#FFFFFF",
                       },
                     ]}
                   >
@@ -417,6 +417,7 @@ const styles = StyleSheet.create({
     padding: 5,
     justifyContent: "center",
     alignItems: "center",
+    textAlign: "center",
     borderRadius: 5,
     marginBottom: 10,
     backgroundColor: "#FF6347",

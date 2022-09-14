@@ -7,6 +7,7 @@ const GroupListGenerator = ({ allGroups }) => {
     <ScrollView>
       <Button
         title="Create Group +"
+        color="#FF6347"
         onPress={() => navigation.navigate("Create Group")}
       />
       {allGroups.map((group) => {
@@ -17,6 +18,7 @@ const GroupListGenerator = ({ allGroups }) => {
             <Text style={styles.location}>Category: {group.category}</Text>
             <Button
               title="View Group"
+              color="#FF6347"
               onPress={() =>
                 navigation.navigate("Group Details", { _id: group._id })
               }
