@@ -26,7 +26,7 @@ const SingleEvent = ({ route }) => {
         })
         .catch((err) => console.log('singleeventerr >>>>', err));
     },
-    [ event ]
+    [ _id, event ]
   );
 
   if (isLoading) {
@@ -45,7 +45,7 @@ const SingleEvent = ({ route }) => {
           <Text style={styles.endTime}>End time: {endTime}</Text>
         </View>
         <Text style={styles.title}> Comments </Text>
-        <AddMessage />
+        <AddMessage _id={_id} event={event} setEvent={setEvent} />
         <EventMessages _id={_id} event={event} />
       </ScrollView>
     );
