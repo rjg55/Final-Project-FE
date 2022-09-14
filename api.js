@@ -63,6 +63,27 @@ function postGroup(newGroupName, groupCategory, newGroupDescription, username) {
   });
 }
 
+
+function postEvent(
+  newEventTitle,
+  newEventCategory,
+  newEventDescription,
+  newEventLocation,
+  newEventCoords,
+  newEventStartTime,
+  newEventEndTime,
+  loggedInUser
+) {
+  return axios.post("http://54.86.179.94:8080/api/events", {
+    title: newEventTitle,
+    category: newEventCategory,
+    description: newEventDescription,
+    location: newEventLocation,
+    coords: newEventCoords,
+    startTime: newEventStartTime,
+    endTime: newEventEndTime,
+    host: loggedInUser,
+
 function patchGroupById(group_id, updatedMembers) {
   return axios.patch(`http://54.86.179.94:8080/api/groups/${group_id}`, {
     members: updatedMembers
@@ -115,6 +136,7 @@ module.exports = {
   getGroupByID,
   sendEventMessage,
   postGroup,
+  postEvent,
   patchGroupById,
   getCoordsFromLocation,
   patchUser,
