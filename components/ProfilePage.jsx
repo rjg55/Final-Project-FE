@@ -1,37 +1,47 @@
 import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet, Button, ScrollView } from "react-native";
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { format } from "date-fns";
 import { useNavigation } from "@react-navigation/native";
+import MaterialCommunityIcons from "react-native-vector-icons/FontAwesome";
 
 const ProfilePage = () => {
   const navigation = useNavigation();
   const { user } = useContext(UserContext);
-  console.log(user);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.host}>{user.username}</Text>
-      <Text style={styles.title}>
-        {user.firstName} {user.lastName}
-      </Text>
-      <Text style={styles.description}>Email: {user.email}</Text>
-      <Text style={styles.description}>
-        Date of Birth: {format(new Date(user.dateOfBirth), "d MMM yyyy")}
-      </Text>
-      <Text style={styles.description}>Phone Number: {user.phoneNumber}</Text>
-      <Text style={styles.description}>Password: {user.password}</Text>
-      <Text style={styles.description}>Thanks: {user.thanks}</Text>
-      <Text style={styles.description}>
-        Profile Created: {format(new Date(user.createdAt), "d MMM yyyy")}
-      </Text>
-      <Button
-        title="Edit Profile"
-        color="#FF6347"
-        onPress={() => navigation.navigate("Edit Profile")}
-      />
-    </View>
+    <ScrollView>
+      <View style={styles.container}>
+        <Text style={styles.header}>{user.username}</Text>
+        <Text style={styles.title}>
+          {user.firstName} {user.lastName}
+        </Text>
+        <Text style={styles.number}>
+          {user.thanks} <MaterialCommunityIcons name="thumbs-o-up" size={40} />
+        </Text>
+        <Text style={styles.thanks}>Thanks</Text>
+      </View>
+      <View style={styles.container}>
+        <Text style={styles.category}>Email: </Text>
+        <Text style={styles.description}>{user.email}</Text>
+        <Text style={styles.category}>Date of Birth:</Text>
+        <Text style={styles.description}>
+          {format(new Date(user.dateOfBirth), "d MMM yyyy")}
+        </Text>
+        <Text style={styles.category}>Phone Number:</Text>
+        <Text style={styles.description}>{user.phoneNumber}</Text>
+        <Text style={styles.category}>Profile Created:</Text>
+        <Text style={styles.description}>
+          {format(new Date(user.createdAt), "d MMM yyyy")}
+        </Text>
+        <Button
+          title="Edit Profile"
+          color="#FF6347"
+          onPress={() => navigation.navigate("Edit Profile")}
+        />
+      </View>
+    </ScrollView>
   );
 
   //   insert your groups
@@ -53,26 +63,36 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
-  host: {
-    paddingLeft: 10,
-    fontSize: 10,
+  thanks: {
+    paddingBottom: 10,
+    fontSize: 15,
     textTransform: "uppercase",
+    alignSelf: "center",
+  },
+  header: {
+    fontSize: 30,
+    fontWeight: "bold",
+    padding: 5,
+    alignSelf: "center",
   },
   title: {
     fontSize: 20,
-    fontWeight: "bold",
-    padding: 10,
+    fontWeight: "semi-bold",
+    alignSelf: "center",
+    fontStyle: "italic",
   },
   description: {
-    fontSize: 16,
-    paddingLeft: 10,
-    paddingBottom: 30,
-    paddingTop: 20,
+    fontSize: 20,
+    alignSelf: "center",
+    paddingBottom: 10,
   },
-  date: {
-    fontSize: 14,
+  number: {
+    fontSize: 50,
+    alignSelf: "center",
+  },
+  category: {
+    fontSize: 12,
     paddingLeft: 10,
-    paddingBottom: 15,
     fontWeight: "bold",
   },
   startTime: {

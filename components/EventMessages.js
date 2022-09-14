@@ -1,9 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import React, { useEffect, useState, useContext } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity
+} from 'react-native';
 import { getEventMessages } from '../api';
 import { formatDistance } from 'date-fns';
+import { UserContext } from '../contexts/UserContext';
+import DeleteMessage from './DeleteMessage';
 
-const EventMessages = ({ _id, event }) => {
+const EventMessages = ({ _id }) => {
+  const { user } = useContext(UserContext);
   const [ messages, setMessages ] = useState([]);
 
   useEffect(
@@ -13,7 +22,7 @@ const EventMessages = ({ _id, event }) => {
         setMessages(filtered);
       });
     },
-    [ event ]
+    [ messages ]
   );
   return (
     <ScrollView>
@@ -27,7 +36,10 @@ const EventMessages = ({ _id, event }) => {
         return (
           <View style={styles.container} key={message._id}>
             <Text style={styles.description}>{message.message}</Text>
-            <Text style={styles.date}>{createdAt}</Text>
+            <Text style={styles.date}>
+              posted by: {user.username} - {createdAt}
+            </Text>
+            <DeleteMessage _id={message._id} setMessages={setMessages} />
           </View>
         );
       })}

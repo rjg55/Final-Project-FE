@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { getEvents } from "./api.js";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Text } from 'react-native';
 import SingleEvent from "./components/SingleEvent";
 import MainPage from "./Pages/MainPage";
 import SingleGroup from "./components/SingleGroup";
@@ -27,6 +28,7 @@ import NewEventForm from "./components/NewEventForm";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+
   const [events, setEvents] = useState([]);
   const [user, setUser] = useState({
     _id: "63161dc08f899990132f0ea6",
@@ -53,23 +55,13 @@ export default function App() {
       });
   }, []);
 
+
   return (
     <NavigationContainer>
       <UserContext.Provider value={{ user, setUser }}>
         <EventContext.Provider value={{ events, setEvents }}>
+
           <Header />
-          <Text
-            style={{
-              paddingTop: 70,
-              paddingBottom: 20,
-              textAlign: "center",
-              fontSize: 30,
-              fontWeight: "bold",
-              color: "#FF6347",
-            }}
-          >
-            UpMeet
-          </Text>
           {/* <Navbar /> */}
           <Stack.Navigator>
             <Stack.Screen
