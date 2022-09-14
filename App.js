@@ -51,18 +51,6 @@ export default function App() {
       <UserContext.Provider value={{ user, setUser }}>
         <EventContext.Provider value={{ events, setEvents }}>
           <Header />
-          <Text
-            style={{
-              paddingTop: 70,
-              paddingBottom: 20,
-              textAlign: "center",
-              fontSize: 30,
-              fontWeight: "bold",
-              color: "#FF6347",
-            }}
-          >
-            UpMeet
-          </Text>
           {/* <Navbar /> */}
           <Stack.Navigator>
             <Stack.Screen
