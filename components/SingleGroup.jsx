@@ -9,6 +9,7 @@ const SingleGroup = ({ route }) => {
   const [group, setGroup] = useState({});
   const { _id } = route.params;
   const [groupEvents, setGroupEvents] = useState([]);
+  const [groupMembers, setGroupMembers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [err, setErr] = useState(null);
 
@@ -17,6 +18,7 @@ const SingleGroup = ({ route }) => {
     setErr(null);
     getGroupByID(_id).then((fetchedGroup) => {
       setGroup(fetchedGroup);
+      setGroupMembers(fetchedGroup.members);
       setIsLoading(false);
     });
     setIsLoading(true);
@@ -32,6 +34,7 @@ const SingleGroup = ({ route }) => {
         setErr(`${error.response.status} ${error.response.statusText}`)
       );
   }, []);
+  console.log(groupMembers, "<<<<<<<<<<<<<<");
 
   if (isLoading) {
     return <Text style={styles.description}>Loading...</Text>;

@@ -50,6 +50,12 @@ function postGroup(newGroupName, groupCategory, newGroupDescription, username) {
   });
 }
 
+function patchGroupById(_id, updatedMembers) {
+  return axios.post(`http://54.86.179.94:8080/api/groups/${group_id}`, {
+    members: updatedMembers,
+  });
+}
+
 module.exports = {
   getAllGroups,
   getEvents,
@@ -57,4 +63,5 @@ module.exports = {
   getEventMessages,
   getGroupByID,
   postGroup,
+  patchGroupById,
 };
