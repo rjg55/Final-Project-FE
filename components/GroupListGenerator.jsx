@@ -5,6 +5,10 @@ const GroupListGenerator = ({ allGroups }) => {
   const navigation = useNavigation();
   return (
     <ScrollView>
+      <Button
+        title="Create Group +"
+        onPress={() => navigation.navigate("Create Group")}
+      />
       {allGroups.map((group) => {
         return (
           <View key={group._id} style={styles.container}>

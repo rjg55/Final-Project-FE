@@ -41,6 +41,7 @@ function getEventMessages(id) {
     });
 }
 
+
 function sendEventMessage(id, userTag, message) {
   return axios
     .post(`/api/event-messages/events/${id}`, {
@@ -51,6 +52,14 @@ function sendEventMessage(id, userTag, message) {
     .then(({ data }) => {
       console.log(data);
     });
+
+function postGroup(newGroupName, groupCategory, newGroupDescription, username) {
+  return axios.post("http://54.86.179.94:8080/api/groups", {
+    title: newGroupName,
+    category: groupCategory,
+    description: newGroupDescription,
+    admin: username,
+  });
 }
 
 module.exports = {
@@ -60,4 +69,5 @@ module.exports = {
   getEventMessages,
   getGroupByID,
   sendEventMessage
+  postGroup,
 };
