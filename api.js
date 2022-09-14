@@ -62,6 +62,12 @@ function postGroup(newGroupName, groupCategory, newGroupDescription, username) {
   });
 }
 
+
+function patchGroupById(group_id, updatedMembers) {
+  return axios.patch(`http://54.86.179.94:8080/api/groups/${group_id}`, {
+    members: updatedMembers,
+  });
+
 function getCoordsFromLocation(location) {
   const formattedLocation = location.split(" ").join("+");
   return axios
@@ -81,5 +87,6 @@ module.exports = {
   getGroupByID,
   sendEventMessage,
   postGroup,
+  patchGroupById,
   getCoordsFromLocation,
 };
