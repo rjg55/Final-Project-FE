@@ -41,24 +41,24 @@ function getEventMessages(id) {
     });
 }
 
-
 function sendEventMessage(id, userTag, message) {
   return axios
-    .post(`/api/event-messages/events/${id}`, {
-      eventTag: id,
-      userTag,
-      message
+    .post(`http://54.86.179.94:8080/api/event-messages/events/${id}`, {
+      userTag: userTag,
+      message: message,
+      eventTag: id
     })
-    .then(({ data }) => {
-      console.log(data);
+    .catch((err) => {
+      console.log(err);
     });
+}
 
 function postGroup(newGroupName, groupCategory, newGroupDescription, username) {
-  return axios.post("http://54.86.179.94:8080/api/groups", {
+  return axios.post('http://54.86.179.94:8080/api/groups', {
     title: newGroupName,
     category: groupCategory,
     description: newGroupDescription,
-    admin: username,
+    admin: username
   });
 }
 
@@ -68,6 +68,6 @@ module.exports = {
   getSingleEvent,
   getEventMessages,
   getGroupByID,
-  sendEventMessage
-  postGroup,
+  sendEventMessage,
+  postGroup
 };
