@@ -134,56 +134,6 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#fff",
-    fontSize: 30,
+    fontSize: 20,
   },
 });
-
-// const styles = StyleSheet.create({
-//   container: {
-//     padding: 10,
-//     backgroundColor: "white",
-//     borderRadius: 5,
-//     padding: 10,
-//     margin: 10,
-//     shadowColor: "#171717",
-//     shadowOffset: { width: -2, height: 4 },
-//     shadowOpacity: 0.2,
-//     shadowRadius: 3,
-//   },
-//   admin: {
-//     paddingLeft: 10,
-//   },
-//   title: {
-//     fontSize: 20,
-//     fontWeight: "bold",
-//     padding: 10,
-//   },
-//   description: {
-//     fontSize: 16,
-//     paddingLeft: 10,
-//     paddingBottom: 10,
-//   },
-//   date: {
-//     fontSize: 14,
-//     paddingLeft: 10,
-//     paddingBottom: 15,
-//     fontWeight: "bold",
-//   },
-//   startTime: {
-//     fontSize: 13,
-//     paddingLeft: 10,
-//     paddingBottom: 5,
-//   },
-//   endTime: {
-//     fontSize: 13,
-//     paddingLeft: 10,
-//     paddingBottom: 5,
-//   },
-//   details: {
-//     fontSize: 15,
-//     paddingLeft: 10,
-//     paddingTop: 10,
-//     paddingBottom: 5,
-//     fontWeight: "bold",
-//   },
-// });
