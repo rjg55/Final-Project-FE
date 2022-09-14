@@ -1,4 +1,11 @@
-import { ScrollView, View, Text, StyleSheet, Button } from "react-native";
+import {
+  ScrollView,
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  TouchableOpacity,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 const GroupListGenerator = ({ allGroups }) => {
@@ -16,13 +23,22 @@ const GroupListGenerator = ({ allGroups }) => {
             <Text style={styles.title}>{group.title}</Text>
             <Text style={styles.description}>{group.description}</Text>
             <Text style={styles.location}>Category: {group.category}</Text>
-            <Button
+            {/* <Button
               title="View Group"
               color="#FF6347"
               onPress={() =>
                 navigation.navigate("Group Details", { _id: group._id })
               }
-            />
+            /> */}
+            <TouchableOpacity
+              title="View Event"
+              style={styles.btn}
+              onPress={() =>
+                navigation.navigate("Group Details", { _id: group._id })
+              }
+            >
+              <Text style={styles.btnText}>View Group</Text>
+            </TouchableOpacity>
           </View>
         );
       })}
@@ -70,6 +86,21 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingTop: 10,
     paddingBottom: 5,
+    fontWeight: "bold",
+  },
+  btn: {
+    // paddingBottom: 20,
+    backgroundColor: "#FF6347",
+    color: "#fff",
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 10,
+    borderRadius: 50,
+  },
+  btnText: {
+    fontSize: 15,
+    color: "#fff",
     fontWeight: "bold",
   },
 });
