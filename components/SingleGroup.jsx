@@ -1,22 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, Button } from 'react-native';
-import { format } from 'date-fns';
-import { getGroupByID, getEvents } from '../api';
-import { useNavigation } from '@react-navigation/native';
+import React, { useEffect, useState, useContext } from "react";
+import { View, Text, StyleSheet, ScrollView, Button } from "react-native";
+import { format } from "date-fns";
+import { getGroupByID, getEvents } from "../api";
+import { useNavigation } from "@react-navigation/native";
+import { UserContext } from "../contexts/UserContext";
+import { patchGroupById } from "../api.js";
 
 const SingleGroup = ({ route }) => {
   const navigation = useNavigation();
-  const [ group, setGroup ] = useState({});
   const { _id } = route.params;
-  const [ groupEvents, setGroupEvents ] = useState([]);
-  const [ isLoading, setIsLoading ] = useState(false);
-  const [ err, setErr ] = useState(null);
+  const [group, setGroup] = useState({});
+  const [groupEvents, setGroupEvents] = useState([]);
+  const [groupMembers, setGroupMembers] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [err, setErr] = useState(null);
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     setIsLoading(true);
     setErr(null);
     getGroupByID(_id).then((fetchedGroup) => {
       setGroup(fetchedGroup);
+      setGroupMembers(fetchedGroup.members);
       setIsLoading(false);
     });
     setIsLoading(true);
@@ -40,6 +45,17 @@ const SingleGroup = ({ route }) => {
   if (err) {
     return <Text style={styles.description}>{err}</Text>;
   }
+  const { username } = user;
+
+  const handleJoinGroup = () => {
+    const updateGroupMembers = [...groupMembers, { id: username }];
+    setGroupMembers((currGroupMembers) => {
+      return [...currGroupMembers, { id: username }];
+    });
+    patchGroupById(_id, updateGroupMembers).catch((err) => console.log(err));
+  };
+
+  const memberArray = groupMembers.map((member) => member.id);
 
   return (
     <ScrollView>
@@ -47,11 +63,14 @@ const SingleGroup = ({ route }) => {
         <Text style={styles.title}>{group.title}</Text>
         <Text style={styles.details}>Admin: {group.admin}</Text>
         <Text style={styles.details}>Category: {group.category}</Text>
-        {/* <Text style={styles.details}>
-          Members:
-          {group.members}
-        </Text> */}
+
+        <Text style={styles.details}>Members: {memberArray.join(", ")}</Text>
         <Text style={styles.description}>About: {group.description}</Text>
+        <Button
+          title="Join Group"
+          onPress={handleJoinGroup}
+          disabled={memberArray.includes(username) ? true : false}
+        />
       </View>
       <View>
         <Text style={styles.details}>Upcoming events:</Text>
@@ -70,7 +89,8 @@ const SingleGroup = ({ route }) => {
               <Text style={styles.startTime}>Start time: {start_time}</Text>
               <Text style={styles.endTime}>End time: {end_time}</Text>
               <Text style={styles.details}>{event.location}</Text>
-              <Text style={''}>{event.attendees}</Text>
+
+              <Text style={styles.details}>{event.attendees}</Text>
               <Button
                 title="View Event"
                 onPress={() =>
