@@ -103,6 +103,10 @@ function patchUser(
     });
 }
 
+function deleteMessage(id) {
+  return axios.delete(`http://54.86.179.94:8080/api/event-messages/${id}`);
+}
+
 module.exports = {
   getAllGroups,
   getEvents,
@@ -113,5 +117,6 @@ module.exports = {
   postGroup,
   patchGroupById,
   getCoordsFromLocation,
-  patchUser
+  patchUser,
+  deleteMessage
 };
