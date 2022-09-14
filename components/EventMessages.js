@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { getEventMessages } from '../api';
-import { format, formatDistance } from 'date-fns';
+import { formatDistance } from 'date-fns';
 
 const EventMessages = ({ _id, event }) => {
   const [ messages, setMessages ] = useState([]);
@@ -49,11 +49,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 3
   },
-  host: {
-    paddingLeft: 10,
-    fontSize: 10,
-    textTransform: 'uppercase'
-  },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -69,23 +64,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     paddingLeft: 10,
     paddingBottom: 15,
-    fontWeight: 'bold'
-  },
-  startTime: {
-    fontSize: 13,
-    paddingLeft: 10,
-    paddingBottom: 5
-  },
-  endTime: {
-    fontSize: 13,
-    paddingLeft: 10,
-    paddingBottom: 5
-  },
-  location: {
-    fontSize: 15,
-    paddingLeft: 10,
-    paddingTop: 10,
-    paddingBottom: 5,
     fontWeight: 'bold'
   }
 });
