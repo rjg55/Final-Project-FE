@@ -66,10 +66,10 @@ const AddGroup = () => {
         selectedValue={groupCategory}
         onValueChange={(currentGroupCategory) =>
           setGroupCategory(currentGroupCategory)}>
-        {validGroupCategories.map((category) => {
+        {validGroupCategories.map((category, index) => {
           return (
             <Picker.Item
-              key={category.name}
+              key={index}
               label={category}
               value={category !== 'all' ? category : ''}
             />
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   text: {
-    color: "#fff",
-    fontSize: 20,
-  },
+    color: '#fff',
+    fontSize: 20
+  }
 });
