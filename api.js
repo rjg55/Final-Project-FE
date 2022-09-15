@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { key } from './maps_key';
+import axios from "axios";
+import { key } from "./maps_key";
 
 function getEvents() {
   return axios
@@ -13,7 +13,7 @@ function getEvents() {
 }
 
 function getAllGroups() {
-  return axios.get('http://54.86.179.94:8080/api/groups').then(({ data }) => {
+  return axios.get("http://54.86.179.94:8080/api/groups").then(({ data }) => {
     return data.groups;
   });
 }
@@ -47,7 +47,7 @@ function sendEventMessage(id, userTag, message) {
     .post(`http://54.86.179.94:8080/api/event-messages/events/${id}`, {
       userTag: userTag,
       message: message,
-      eventTag: id
+      eventTag: id,
     })
     .catch((err) => {
       console.log(err);
@@ -55,11 +55,11 @@ function sendEventMessage(id, userTag, message) {
 }
 
 function postGroup(newGroupName, groupCategory, newGroupDescription, username) {
-  return axios.post('http://54.86.179.94:8080/api/groups', {
+  return axios.post("http://54.86.179.94:8080/api/groups", {
     title: newGroupName,
     category: groupCategory,
     description: newGroupDescription,
-    admin: username
+    admin: username,
   });
 }
 
@@ -73,26 +73,30 @@ function postEvent(
   newEventEndTime,
   loggedInUser
 ) {
-  return axios.post('http://54.86.179.94:8080/api/events', {
-    title: newEventTitle,
-    category: newEventCategory,
-    description: newEventDescription,
-    location: newEventLocation,
-    coords: newEventCoords,
-    startTime: newEventStartTime,
-    endTime: newEventEndTime,
-    host: loggedInUser
-  });
+  return axios
+    .post("http://54.86.179.94:8080/api/events", {
+      title: newEventTitle,
+      category: newEventCategory,
+      description: newEventDescription,
+      location: newEventLocation,
+      coords: newEventCoords,
+      startTime: newEventStartTime,
+      endTime: newEventEndTime,
+      host: loggedInUser,
+    })
+    .then(({ data }) => {
+      return data.event;
+    });
 }
 
 function patchGroupById(group_id, updatedMembers) {
   return axios.patch(`http://54.86.179.94:8080/api/groups/${group_id}`, {
-    members: updatedMembers
+    members: updatedMembers,
   });
 }
 
 function getCoordsFromLocation(location) {
-  const formattedLocation = location.split(' ').join('+');
+  const formattedLocation = location.split(" ").join("+");
   return axios
     .get(
       `https://maps.googleapis.com/maps/api/geocode/json?address=${formattedLocation}&key=${key}`
@@ -118,7 +122,7 @@ function patchUser(
       username,
       email,
       phoneNumber,
-      dateOfBirth
+      dateOfBirth,
     })
     .then(({ data }) => {
       return data;
@@ -141,5 +145,5 @@ module.exports = {
   patchGroupById,
   getCoordsFromLocation,
   patchUser,
-  deleteMessage
+  deleteMessage,
 };
