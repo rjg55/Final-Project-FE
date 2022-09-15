@@ -74,6 +74,7 @@ const SingleGroup = ({ route }) => {
         <Text style={styles.description}>About: {group.description}</Text>
         <Button
           title="Join Group"
+          color="#FF6347"
           onPress={handleJoinGroup}
           disabled={memberArray.includes(username) ? true : false}
         />
