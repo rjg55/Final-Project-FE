@@ -31,44 +31,6 @@ const Map = () => {
   const navigation = useNavigation();
 
   const initialMapState = {
-    categories: [
-      {
-        name: "Fastfood Center",
-        icon: (
-          <MaterialCommunityIcons
-            style={styles.chipsIcon}
-            name="food-fork-drink"
-            size={18}
-          />
-        ),
-      },
-      {
-        name: "Restaurant",
-        icon: (
-          <Ionicons name="ios-restaurant" style={styles.chipsIcon} size={18} />
-        ),
-      },
-      {
-        name: "Dineouts",
-        icon: (
-          <Ionicons name="md-restaurant" style={styles.chipsIcon} size={18} />
-        ),
-      },
-      {
-        name: "Snacks Corner",
-        icon: (
-          <MaterialCommunityIcons
-            name="food"
-            style={styles.chipsIcon}
-            size={18}
-          />
-        ),
-      },
-      {
-        name: "Hotel",
-        icon: <Fontisto name="hotel" style={styles.chipsIcon} size={15} />,
-      },
-    ],
     region: {
       latitude: 53.4808,
       longitude: -2.2426,
@@ -197,30 +159,6 @@ const Map = () => {
           Add Event
         </Button>
       </View>
-      <ScrollView
-        horizontal
-        scrollEventThrottle={1}
-        showsHorizontalScrollIndicator={false}
-        height={50}
-        style={styles.chipsScrollView}
-        contentInset={{
-          // iOS only
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 20,
-        }}
-        contentContainerStyle={{
-          paddingRight: Platform.OS === "android" ? 20 : 0,
-        }}
-      >
-        {initialMapState.categories.map((category, index) => (
-          <TouchableOpacity key={index} style={styles.chipsItem}>
-            {category.icon}
-            <Text>{category.name}</Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
       <Animated.ScrollView
         ref={_scrollView}
         horizontal
@@ -310,8 +248,8 @@ const styles = StyleSheet.create({
   },
   addButton: {
     position: "absolute",
-    marginTop: Platform.OS === "ios" ? 70 : 50,
-    top: 50,
+    marginTop: Platform.OS === "ios" ? 70 : 30,
+    top: 10,
     left: 10,
     paddingHorizontal: 10,
     zIndex: 100,
