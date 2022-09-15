@@ -38,7 +38,6 @@ export default function App() {
   });
 
   useEffect(() => {
-    console.log("re-rerendering");
     getEvents()
       .then((eventsFromApi) => {
         setEvents(eventsFromApi);

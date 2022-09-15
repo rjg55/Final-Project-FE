@@ -149,16 +149,15 @@ const Map = () => {
           );
         })}
       </MapView>
-      <View style={styles.addButton}>
+      <ScrollView style={styles.addButton}>
         <Button
-          title="Add event!"
+          title="Create event +"
+          color="#FF6347"
           onPress={() => {
             navigation.navigate("NewEvent");
           }}
-        >
-          Add Event
-        </Button>
-      </View>
+        />
+      </ScrollView>
       <Animated.ScrollView
         ref={_scrollView}
         horizontal
@@ -248,10 +247,9 @@ const styles = StyleSheet.create({
   },
   addButton: {
     position: "absolute",
-    marginTop: Platform.OS === "ios" ? 70 : 30,
-    top: 10,
-    left: 10,
-    paddingHorizontal: 10,
+    marginTop: Platform.OS === "ios" ? 70 : 0,
+    top: 0,
+    width: "100%",
     zIndex: 100,
   },
   searchBox: {

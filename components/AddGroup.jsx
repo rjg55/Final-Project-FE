@@ -41,6 +41,10 @@ const AddGroup = () => {
         setGroupCategory('');
         setNewGroupDescription('');
         setNewGroupName('');
+
+        Alert.alert("Group added!", "You can safely leave this page.", [
+          { text: "ok", onPress: () => {navigation.navigate('Home')} },
+        ]);
       })
       .catch((error) =>
         setErr(`${error.response.status} ${error.response.statusText}`)
@@ -84,6 +88,7 @@ const AddGroup = () => {
       />
       <Button
         title="Create+"
+        color="#FF6347"
         onPress={handleSubmit}
         disabled={newGroupName === '' ? true : false}
       />

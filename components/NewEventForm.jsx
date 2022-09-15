@@ -7,7 +7,8 @@ import {
   Button,
   TextInput,
   SafeAreaView,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { format } from "date-fns";
@@ -71,7 +72,9 @@ const AddEvent = ({route}) => {
       }
       );
 
-      navigation.navigate('Home')
+      Alert.alert("Event added!", "You can safely leave this page.", [
+        { text: "ok", onPress: () => {navigation.navigate('Home')} },
+      ]);
   };
 
   if (err) {
@@ -190,6 +193,7 @@ const AddEvent = ({route}) => {
     </View>
       <Button
         title="Create Event"
+        color="#FF6347"
         onPress={handleSubmit}
         disabled={newEventTitle === "" ? true : false}
       />
