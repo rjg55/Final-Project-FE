@@ -7,6 +7,7 @@ import {
   Button,
   TextInput,
   SafeAreaView,
+  TouchableOpacity
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { format } from "date-fns";
@@ -15,8 +16,10 @@ import { UserContext } from "../contexts/UserContext";
 import { postEvent } from "../api.js";
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { set } from "date-fns/esm";
+import { EventContext } from "../contexts/EventsContext";
 
 const AddEvent = ({route}) => {
+  const { events, setEvents } = useContext(EventContext);
   const { user } = useContext(UserContext);
   const {location, searchCoords} = route.params
   const [isLoading, setIsLoading] = useState(false);
@@ -25,7 +28,6 @@ const AddEvent = ({route}) => {
   const [newEventTitle, setNewEventTitle] = useState("");
   const [newEventDescription, setNewEventDescription] = useState("");
   const [newEventLocation, setNewEventLocation] = useState(location)
-  const [newEventCoords, setNewEventCoords] = useState({})
   const [newEventStartTime, setNewEventStartTime] = useState("");
   const [newEventEndTime, setNewEventEndTime] = useState("");
   const validGroupCategories = [
@@ -40,24 +42,24 @@ const AddEvent = ({route}) => {
   ];
   const navigation = useNavigation()
   const { username } = user;
-
   const coords = {lat: searchCoords.lat, long: searchCoords.lng}
-
   
   const handleSubmit = () => {
-      setNewEventCoords(coords)
-    if (!newEventCoords) {
+    if (!coords) {
         navigation.navigate('Home')
     }
     postEvent(newEventTitle,
         newEventCategory,
         newEventDescription,
         newEventLocation,
-        newEventCoords,
+        coords,
         newEventStartTime,
         newEventEndTime,
         username)
-      .then(() => {
+      .then((postedEvent) => {
+        setEvents((currEvents) => {
+          return [...currEvents, postedEvent]
+        })
         setNewEventCategory("");
         setNewEventDescription("");
         setNewEventTitle("");
@@ -68,6 +70,7 @@ const AddEvent = ({route}) => {
         console.log(error);
       }
       );
+
       navigation.navigate('Home')
   };
 
@@ -152,11 +155,11 @@ const AddEvent = ({route}) => {
       />
       <Text>Location: {location}</Text>
       <View>
-      <Button onPress={showDatepicker} title="Pick a date" />
-      <Button onPress={showStartTimepicker} title="Pick a start time" />
-      <Button onPress={showEndTimepicker} title="Pick an end time" />
-      <Text>Start Time: {`${newEventStartTime}`}</Text>
-      <Text>End Time: {`${newEventEndTime}`}</Text>
+      <TouchableOpacity style={styles.btn} onPress={showDatepicker} title="Pick a date"><Text style={styles.btnText}>Pick a date</Text></TouchableOpacity>
+      <TouchableOpacity style={styles.btn} onPress={showStartTimepicker} title="Pick a start time"><Text style={styles.btnText}>Pick a start time</Text></TouchableOpacity>
+      <TouchableOpacity style={styles.btn} onPress={showEndTimepicker} title="Pick an end time"><Text style={styles.btnText}>Pick an end time</Text></TouchableOpacity>
+      <Text style={styles.btnText}>Start Time: {`${newEventStartTime}`}</Text>
+      <Text style={styles.btnText}>End Time: {`${newEventEndTime}`}</Text>
       {datePicker && (
         <DateTimePicker
           testID="datePicker"
@@ -197,6 +200,23 @@ const AddEvent = ({route}) => {
 export default AddEvent;
 
 const styles = StyleSheet.create({
+  btn: {
+    // paddingBottom: 20,
+    paddingLeft: 10,
+    paddingRight: 10,
+    backgroundColor: "#FF6347",
+    color: "#fff",
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 10,
+    borderRadius: 50,
+  },
+  btnText: {
+    fontSize: 15,
+    color: "#fff",
+    fontWeight: "bold",
+  },
     container: {
       flex: 1,
       backgroundColor: "#E6E6FA",

@@ -29,13 +29,10 @@ const NewEvent = () => {
     lat: 53.4808,
     lng: -2.2426,
   });
-  console.log(searchCoords);
   const handleSubmit = () => {
-
-    console.log(location);
-    console.log(location.trim());
-    getCoordsFromLocation(location.trim())
+    getCoordsFromLocation(location)
       .then((coordsFromApi) => {
+        console.log(coordsFromApi);
         setSearchCoords(coordsFromApi);
         setShowConfirm(true)  
       })
