@@ -6,6 +6,7 @@ import {
   ScrollView,
   Button,
   TextInput,
+  Alert,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { format } from "date-fns";
@@ -15,6 +16,7 @@ import { postGroup } from "../api.js";
 
 const AddGroup = () => {
   const { user } = useContext(UserContext);
+  const navigation = useNavigation();
 
   const [isLoading, setIsLoading] = useState(false);
   const [err, setErr] = useState(null);
