@@ -1,33 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { getSingleEvent } from '../api';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import { format } from 'date-fns';
-import EventMessages from './EventMessages';
-import AddMessage from './AddMessage';
+import React, { useEffect, useState } from "react";
+import { getSingleEvent } from "../api";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { format } from "date-fns";
+import EventMessages from "./EventMessages";
+import AddMessage from "./AddMessage";
 
 const SingleEvent = ({ route }) => {
-  const [ isLoading, setIsLoading ] = useState(true);
-  const [ event, setEvent ] = useState({});
-  const [ startTime, setStartTime ] = useState('');
-  const [ endTime, setEndTime ] = useState('');
-  const [ date, setDate ] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [event, setEvent] = useState({});
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const [date, setDate] = useState("");
 
   const { _id } = route.params;
 
-  useEffect(
-    () => {
-      getSingleEvent(_id)
-        .then((event) => {
-          setIsLoading(false);
-          setEvent(event);
-          setDate(format(new Date(event.startTime), 'd MMM yyyy'));
-          setStartTime(format(new Date(event.startTime), 'h:mm bbb'));
-          setEndTime(format(new Date(event.endTime), 'h:mm bbb'));
-        })
-        .catch((err) => console.log('singleeventerr >>>>', err));
-    },
-    [ _id, event ]
-  );
+  useEffect(() => {
+    getSingleEvent(_id)
+      .then((event) => {
+        setIsLoading(false);
+        setEvent(event);
+        setDate(format(new Date(event.startTime), "d MMM yyyy"));
+        setStartTime(format(new Date(event.startTime), "h:mm bbb"));
+        setEndTime(format(new Date(event.endTime), "h:mm bbb"));
+      })
+      .catch((err) => console.log(err));
+  }, [_id, event]);
 
   if (isLoading) {
     return <Text style={styles.title}>Loading...</Text>;
@@ -57,52 +54,52 @@ export default SingleEvent;
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 5,
     padding: 10,
     margin: 10,
-    shadowColor: '#171717',
+    shadowColor: "#171717",
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
-    shadowRadius: 3
+    shadowRadius: 3,
   },
   host: {
     paddingLeft: 10,
     fontSize: 10,
-    textTransform: 'uppercase'
+    textTransform: "uppercase",
   },
   title: {
     fontSize: 20,
-    fontWeight: 'bold',
-    padding: 10
+    fontWeight: "bold",
+    padding: 10,
   },
   description: {
     fontSize: 16,
     paddingLeft: 10,
     paddingBottom: 30,
-    paddingTop: 20
+    paddingTop: 20,
   },
   date: {
     fontSize: 14,
     paddingLeft: 10,
     paddingBottom: 15,
-    fontWeight: 'bold'
+    fontWeight: "bold",
   },
   startTime: {
     fontSize: 13,
     paddingLeft: 10,
-    paddingBottom: 5
+    paddingBottom: 5,
   },
   endTime: {
     fontSize: 13,
     paddingLeft: 10,
-    paddingBottom: 5
+    paddingBottom: 5,
   },
   location: {
     fontSize: 15,
     paddingLeft: 10,
     paddingTop: 10,
     paddingBottom: 5,
-    fontWeight: 'bold'
-  }
+    fontWeight: "bold",
+  },
 });

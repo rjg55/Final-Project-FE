@@ -32,7 +32,6 @@ const NewEvent = () => {
   const handleSubmit = () => {
     getCoordsFromLocation(location)
       .then((coordsFromApi) => {
-        console.log(coordsFromApi);
         setSearchCoords(coordsFromApi);
         setShowConfirm(true)  
       })

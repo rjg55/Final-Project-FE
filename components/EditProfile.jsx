@@ -7,6 +7,7 @@ import {
   Button,
   TextInput,
   Alert,
+  TouchableOpacity,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { format } from "date-fns";
@@ -97,10 +98,14 @@ const EditProfile = () => {
         value={phoneNumber}
         onChangeText={setPhoneNumber}
       />
-      <Button title="Edit DoB" onPress={() => setOpen(true)} />
+      <TouchableOpacity title="Edit DoB" onPress={() => setOpen(true)} style={styles.btn}>
+              <Text style={styles.btnText}>Edit DoB</Text></TouchableOpacity>
       {open && <DateTimePicker value={dateOfBirth} onChange={onChange} />}
       <Text> </Text>
-      <Button title="Save Changes" onPress={handleSubmit} />
+      <TouchableOpacity style={styles.btn}
+ title="Save Changes" onPress={handleSubmit} >
+ <Text style={styles.btnText}>Save Changes</Text>
+</TouchableOpacity>
     </View>
   );
 };
@@ -108,6 +113,23 @@ const EditProfile = () => {
 export default EditProfile;
 
 const styles = StyleSheet.create({
+  btn: {
+    // paddingBottom: 20,
+    paddingLeft: 10,
+    paddingRight: 10,
+    backgroundColor: "#FF6347",
+    color: "#fff",
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 10,
+    borderRadius: 50,
+  },
+  btnText: {
+    fontSize: 15,
+    color: "#fff",
+    fontWeight: "bold",
+  },
   container: {
     flex: 1,
     backgroundColor: "#E6E6FA",
