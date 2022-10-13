@@ -3,7 +3,7 @@ import { key } from "./maps_key";
 
 function getEvents() {
   return axios
-    .get(`http://54.86.179.94:8080/api/events`)
+    .get(`https://just-meet.onrender.com/api/events`)
     .then(({ data }) => {
       return data.events;
     })
@@ -13,14 +13,16 @@ function getEvents() {
 }
 
 function getAllGroups() {
-  return axios.get("http://54.86.179.94:8080/api/groups").then(({ data }) => {
-    return data.groups;
-  });
+  return axios
+    .get("https://just-meet.onrender.com/api/groups")
+    .then(({ data }) => {
+      return data.groups;
+    });
 }
 
 function getSingleEvent(id) {
   return axios
-    .get(`http://54.86.179.94:8080/api/events/${id}`)
+    .get(`https://just-meet.onrender.com/api/events/${id}`)
     .then(({ data }) => {
       return data.event;
     });
@@ -28,7 +30,7 @@ function getSingleEvent(id) {
 
 function getGroupByID(id) {
   return axios
-    .get(`http://54.86.179.94:8080/api/groups/${id}`)
+    .get(`https://just-meet.onrender.com/api/groups/${id}`)
     .then(({ data }) => {
       return data.group;
     });
@@ -36,7 +38,7 @@ function getGroupByID(id) {
 
 function getEventMessages(id) {
   return axios
-    .get(`http://54.86.179.94:8080/api/event-messages/events/${id}`)
+    .get(`https://just-meet.onrender.com/api/event-messages/events/${id}`)
     .then(({ data }) => {
       return data.messages;
     });
@@ -44,7 +46,7 @@ function getEventMessages(id) {
 
 function sendEventMessage(id, userTag, message) {
   return axios
-    .post(`http://54.86.179.94:8080/api/event-messages/events/${id}`, {
+    .post(`https://just-meet.onrender.com/api/event-messages/events/${id}`, {
       userTag: userTag,
       message: message,
       eventTag: id,
@@ -55,7 +57,7 @@ function sendEventMessage(id, userTag, message) {
 }
 
 function postGroup(newGroupName, groupCategory, newGroupDescription, username) {
-  return axios.post("http://54.86.179.94:8080/api/groups", {
+  return axios.post("https://just-meet.onrender.com/api/groups", {
     title: newGroupName,
     category: groupCategory,
     description: newGroupDescription,
@@ -74,7 +76,7 @@ function postEvent(
   loggedInUser
 ) {
   return axios
-    .post("http://54.86.179.94:8080/api/events", {
+    .post("https://just-meet.onrender.com/api/events", {
       title: newEventTitle,
       category: newEventCategory,
       description: newEventDescription,
@@ -90,7 +92,7 @@ function postEvent(
 }
 
 function patchGroupById(group_id, updatedMembers) {
-  return axios.patch(`http://54.86.179.94:8080/api/groups/${group_id}`, {
+  return axios.patch(`https://just-meet.onrender.com/api/groups/${group_id}`, {
     members: updatedMembers,
   });
 }
@@ -116,7 +118,7 @@ function patchUser(
   dateOfBirth
 ) {
   return axios
-    .patch(`http://54.86.179.94:8080/api/users/${id}`, {
+    .patch(`https://just-meet.onrender.com/api/users/${id}`, {
       firstName,
       lastName,
       username,
@@ -130,7 +132,9 @@ function patchUser(
 }
 
 function deleteMessage(id) {
-  return axios.delete(`http://54.86.179.94:8080/api/event-messages/${id}`);
+  return axios.delete(
+    `https://just-meet.onrender.com/api/event-messages/${id}`
+  );
 }
 
 module.exports = {
