@@ -1,5 +1,7 @@
 # Just Meet - Mobile App
 
+The API for this app can be found at [this](https://github.com/rjg55/backend-JML) link.
+
 Trying to make friends in a city or new place can be difficult. We’re here to fix that. Our app is called Just Meet. We’ve designed it to facilitate meeting up for social events and meeting like minded people in your area. The design is simple and straightforward, making it easy to meet new people and discover your new favorite hobby. You can see events in your area with an interactive map, join events/groups that align with your interests, post new events that you want others to join and make a user profile to link all your attended and hosted events.
 
 - **Inspired by** - Other apps like too good to go (where you can see different restaurants offering surplus food around you on a map view) and partner/friend finding apps that are more focused on making new connections
