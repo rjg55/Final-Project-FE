@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "upMeet",
-    "slug": "upMeet",
+    "name": "Just Meet",
+    "slug": "just-meet",
+    "owner": "rjg55",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
