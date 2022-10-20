@@ -3,26 +3,20 @@ import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import {
   StyleSheet,
   Text,
-  TextInput,
   View,
   ScrollView,
   Animated,
-  Image,
   TouchableOpacity,
   Dimensions,
   Platform,
   Button,
 } from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Fontisto from "react-native-vector-icons/Fontisto";
 import { useContext } from "react";
 import { EventContext } from "../contexts/EventsContext";
 import { useNavigation } from "@react-navigation/native";
 import { format } from "date-fns";
 
 const { width, height } = Dimensions.get("window");
-const CARD_HEIGHT = 100;
 const CARD_WIDTH = width * 0.818;
 const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
 

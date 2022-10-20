@@ -11,12 +11,10 @@ import {
   Alert
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import { format } from "date-fns";
 import { useNavigation } from "@react-navigation/native";
 import { UserContext } from "../contexts/UserContext";
 import { postEvent } from "../api.js";
 import DateTimePicker from '@react-native-community/datetimepicker'
-import { set } from "date-fns/esm";
 import { EventContext } from "../contexts/EventsContext";
 
 const AddEvent = ({route}) => {

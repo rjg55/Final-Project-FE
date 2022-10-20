@@ -97,12 +97,6 @@ const SingleGroup = ({ route }) => {
               <Text style={styles.endTime}>End time: {end_time}</Text>
               <Text style={styles.details}>{event.location}</Text>
               <Text style={styles.details}>{event.attendees}</Text>
-              {/* <Button
-                title="View Event"
-                onPress={() =>
-                  navigation.navigate("Event Details", { _id: event._id })
-                }
-              /> */}
               <TouchableOpacity
                 title="View Event"
                 style={styles.btn}

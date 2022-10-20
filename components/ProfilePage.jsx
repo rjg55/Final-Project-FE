@@ -43,10 +43,6 @@ const ProfilePage = () => {
       </View>
     </ScrollView>
   );
-
-  //   insert your groups
-  //   Your upcoming events?
-  //   Thanks etc.
 };
 
 export default ProfilePage;

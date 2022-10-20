@@ -5,17 +5,11 @@ import {
   Text,
   TextInput,
   View,
-  ScrollView,
-  Animated,
-  Image,
-  TouchableOpacity,
   Dimensions,
   Platform,
   Button,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Fontisto from "react-native-vector-icons/Fontisto";
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 
