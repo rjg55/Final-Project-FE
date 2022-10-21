@@ -10,6 +10,12 @@ Trying to make friends in a city or new place can be difficult. We’re here to 
 
 There are user accounts (no authentification added yet) so a user can see events on a mapview or list, view/comment/join individual events, view/join groups and edit their profile.
 
+<span>
+<img src="Screenshots/Screenshot from 2022-10-21 10-42-09.png" alt="Home Screen" width="200" height="" title="Home Screen">
+<img src="Screenshots/Screenshot from 2022-10-21 10-42-45.png" alt="Map Screen" width="200" height="" title="Map Screen">
+<img src="Screenshots/Screenshot from 2022-10-21 10-42-27.png" alt="Events Screen" width="200" height="" title="Events Screen">
+</span>
+
 Tech Stack:
 
 - React-native framework - components, routing, state and context.
