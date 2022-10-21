@@ -8,10 +8,6 @@ import SingleEvent from "./components/SingleEvent";
 import MainPage from "./Pages/MainPage";
 import SingleGroup from "./components/SingleGroup";
 import AddGroup from "./components/AddGroup";
-import Groups from "./components/Groups";
-import Map from "./components/Map";
-import Events from "./Pages/Events";
-import { TouchableHighlight, Button, Image, Text } from "react-native";
 import ProfilePage from "./components/ProfilePage";
 import EditProfile from "./components/EditProfile";
 import Header from "./components/Header";
@@ -73,17 +69,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     paddingTop: 50
-//   },
-//   tinyLogo: {
-//     width: 50,
-//     height: 50
-//   },
-//   logo: {
-//     width: 66,
-//     height: 58
-//   }
-// });
